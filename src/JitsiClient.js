@@ -75,8 +75,10 @@ export default class JitsiClient {
       log.debug("Meeting room name:", this.room);
 
       // Add the room name to the bosh & websocket URLs to ensure all users end up on the same shard
-      config.bosh += `?room=${this.room}`;
+      delete config.bosh;
       config.websocket += `?room=${this.room}`;
+      config.serviceUrl = config.websocket;
+      delete config.websocket;
 
       this.jitsiConnection = new JitsiMeetJS.JitsiConnection(
         null,
