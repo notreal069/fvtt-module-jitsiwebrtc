@@ -925,8 +925,8 @@ export default class JitsiClient {
     delete config.startVideoMuted;
 
     // Set an application name in case statistics are enabled
-    config.applicationName = `FVTT-${game.data.version} ${MODULE_NAME}-${
-      game.modules.get(MODULE_NAME).data.version
+    config.applicationName = `FVTT-${game.version || game.data.version} ${MODULE_NAME}-${
+      game.modules.get(MODULE_NAME).version
     }`;
   }
 

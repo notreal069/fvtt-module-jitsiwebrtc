@@ -10,7 +10,7 @@ export default class JitsiAVDeprecation extends Application {
       width: 640,
       // height: 500,
       classes: ["jitsiAVDeprecation"],
-      title: module.data.title,
+      title: module.title,
     });
   }
 
@@ -23,7 +23,7 @@ export default class JitsiAVDeprecation extends Application {
       game.settings.set(
         MODULE_NAME,
         "hideDeprecationWarning",
-        ev.currentTarget.checked ? module.data.version : ""
+        ev.currentTarget.checked ? module.version : ""
       );
     });
   }

@@ -41,7 +41,7 @@ Hooks.on("ready", () => {
   if (
     game.user.isGM &&
     game.settings.get(MODULE_NAME, "hideDeprecationWarning") !==
-      module.data.version
+      module.version
   ) {
     const deprecationWarning = new JitsiAVDeprecation();
     deprecationWarning.render(true);
