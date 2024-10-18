@@ -183,7 +183,7 @@ export default class JitsiClient {
     try {
       localTracks = await JitsiMeetJS.createLocalTracks({
         devices: devlist,
-        resolution: 240,
+        //resolution: 240,
         cameraDeviceId: videoSrc,
         micDeviceId: audioSrc,
         desktopSharingFrameRate: {
