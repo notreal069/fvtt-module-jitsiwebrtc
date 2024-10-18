@@ -190,11 +190,11 @@ export default class JitsiClient {
           min: 5,
           max: 30,
         },
-        constraints: {
-          video: {
-            aspectRatio: 4 / 3,
-          },
-        },
+        //constraints: {
+        //  video: {
+        //    aspectRatio: 4 / 3,
+        //  },
+        //},
       });
     } catch (err) {
       log.warn("createLocalTracks error:", err);
