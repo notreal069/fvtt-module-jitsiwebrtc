@@ -702,7 +702,7 @@ export default class JitsiClient {
     }
 
     // Select all participants so their video stays active
-    this.jitsiConference.selectParticipants(Object.keys(this.idCache));
+    // this.jitsiConference.selectParticipants(Object.keys(this.idCache));
 
     /** Set all participants to on-stage so video quality is improved.
      * We also need to set the default constraints to avoid them getting set back to jitsi defaults.
