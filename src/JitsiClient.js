@@ -592,18 +592,16 @@ export default class JitsiClient {
     // Create user data for the external user
     const data = {
       _id: externalUserId,
-      active: true,
+      name: this.externalUserCache[id],
       password: "",
+      active: true,
+      color: "#ffffff",
       role: CONST.USER_ROLES.NONE,
       permissions: {
         BROADCAST_AUDIO: true,
         BROADCAST_VIDEO: true,
       },
-      avatar: CONST.DEFAULT_TOKEN,
-      character: "",
-      color: "#ffffff",
       flags: {},
-      name: this.externalUserCache[id],
     };
 
     // Add the external user as a temporary user entity
