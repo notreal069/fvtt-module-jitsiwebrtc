@@ -607,7 +607,7 @@ export default class JitsiClient {
     };
 
     // Add the external user as a temporary user entity
-    const externalUser = new User(data);
+    const externalUser = new User(data, {strict: 0});
     game.users.set(externalUser.id, externalUser);
 
     return externalUserId;
