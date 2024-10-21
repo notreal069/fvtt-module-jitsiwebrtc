@@ -181,21 +181,21 @@ export default class JitsiClient {
     // Try to create the requested tracks
     let localTracks = [];
     try {
-      localTracks = await JitsiMeetJS.createLocalTracks({
-        devices: devlist,
-        //resolution: 240,
-        cameraDeviceId: videoSrc,
-        micDeviceId: audioSrc,
-        desktopSharingFrameRate: {
-          min: 5,
-          max: 30,
-        },
-        //constraints: {
-        //  video: {
-        //    aspectRatio: 4 / 3,
-        //  },
-        //},
-      });
+      // localTracks = await JitsiMeetJS.createLocalTracks({
+      //   devices: devlist,
+      //   //resolution: 240,
+      //   cameraDeviceId: videoSrc,
+      //   micDeviceId: audioSrc,
+      //   desktopSharingFrameRate: {
+      //     min: 5,
+      //     max: 30,
+      //   },
+      //   constraints: {
+      //    video: {
+      //      aspectRatio: 4 / 3,
+      //    },
+      //   },
+      // });
     } catch (err) {
       log.warn("createLocalTracks error:", err);
       return null;
