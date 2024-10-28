@@ -45,7 +45,7 @@ export default class JitsiClient {
   async createOrFindFolder(folderName) {
     let folder = game.folders.find(f => f.name === folderName && f.type === "Actor");
     if (!folder) {
-      folder = await Folder.create({ name: folderName, type: 'Actor', color: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase(); });
+      folder = await Folder.create({ name: folderName, type: 'Actor', color: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase() });
     }
     return folder;
   }
@@ -618,7 +618,7 @@ export default class JitsiClient {
       character: actor.id,
       color: "#ffffff",
       flags: {},
-      name: externalUserId
+      name: this.externalUserCache[id],
     };
 
     // Add the external user as a temporary user entity
@@ -720,7 +720,7 @@ export default class JitsiClient {
     }
 
     // Select all participants so their video stays active
-    this.jitsiConference.selectParticipants(Object.keys(this.idCache));
+    // this.jitsiConference.selectParticipants(Object.keys(this.idCache));
 
     /** Set all participants to on-stage so video quality is improved.
      * We also need to set the default constraints to avoid them getting set back to jitsi defaults.
