@@ -41,6 +41,15 @@ export default class JitsiClient {
     this.render = debounce(this.avMaster.render.bind(this.jitsiAvClient), 2000);
   }
 
+  // utils
+  async createOrFindFolder(folderName) {
+    let folder = game.folders.find(f => f.name === folderName && f.type === "Actor");
+    if (!folder) {
+      folder = await Folder.create({ name: folderName, type: 'Actor', color: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase(); });
+    }
+    return folder;
+  }
+
   /* -------------------------------------------- */
   /*  JitsiRTC Internal methods                   */
   /* -------------------------------------------- */
@@ -585,9 +594,15 @@ export default class JitsiClient {
   addExternalUserData(id) {
     log.debug("Adding external Jitsi user:", id);
 
+    // fetch ghost user token folder
+    const folder = this.createOrFindFolder('jitsiwebrtc ghost users')
+
     // Create a new Jitsi ID for the user
     const externalUserId = randomID(16);
     this.externalUserIdCache[id] = externalUserId;
+
+    // create ghost user token
+    const actor = Actor.create({ name: this.externalUserCache[id], type: "character", folder: folder.id })
 
     // Create user data for the external user
     const data = {
@@ -600,15 +615,18 @@ export default class JitsiClient {
         BROADCAST_VIDEO: true,
       },
       avatar: CONST.DEFAULT_TOKEN,
-      character: "",
+      character: actor.id,
       color: "#ffffff",
       flags: {},
-      name: this.externalUserCache[id],
+      name: externalUserId
     };
 
     // Add the external user as a temporary user entity
-    const externalUser = new User(data);
-    game.users.set(externalUser.id, externalUser);
+    const promisedUser = User.create(data);
+    (async () => {
+      const externalUser = await promisedUser;
+      game.users.set(externalUser.id, externalUser);
+    })()
 
     return externalUserId;
   }
