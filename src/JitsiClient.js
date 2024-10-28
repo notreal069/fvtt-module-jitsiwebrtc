@@ -42,10 +42,12 @@ export default class JitsiClient {
   }
 
   // utils
-  async createOrFindFolder(folderName) {
+  createOrFindFolder(folderName) {
     let folder = game.folders.find(f => f.name === folderName && f.type === "Actor");
     if (!folder) {
-      folder = await Folder.create({ name: folderName, type: 'Actor', color: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase() });
+      ( async () => {
+        folder = await Folder.create({ name: folderName, type: 'Actor', color: '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase() });
+      })()
     }
     return folder;
   }
